@@ -8,6 +8,10 @@ Because I like the aesthetic of the original centre console of my car, I decided
 
 ![Android Auto on origional display](https://github.com/TheReal420BlazeIt/Opel_DVD800_Display_Pi_Hat/blob/02293e8a4e8393881985643bf354ae22a1c8a668/img/display_android_auto.jpeg)
 ![Display Part Number](https://github.com/TheReal420BlazeIt/Opel_DVD800_Display_Pi_Hat/blob/02293e8a4e8393881985643bf354ae22a1c8a668/img/display_part_number.jpeg)
+## Parts
+All the parts are easy to get at every electronics shop. Except for the CBX1457. It was quite hard to find the chip. I ended up with ordering one from AliExpress. Quite expensive (around 35 euro's), but it works like a charm. Another option is to salvage one from a car head-unit that uses the same video chip. I ordered the PCB from JLCPCB.
+
+CBX1457 datasheet: https://datasheetspdf.com/pdf-down/C/X/B/CXB1457R-SonyCorporation.pdf
 
 ## Raspberry Pi config.txt
 The Raspberry Pi needs to be configured to output RGB video over GPIO. To enable this, we need to add a couple of lines in the config.txt on the Pi boot partition:
@@ -31,6 +35,8 @@ The Raspberry Pi needs to be configured to output RGB video over GPIO. To enable
     dpi_output_format=286742
         
     dpi_timings=480 0 50 12 50 240 0 6 3 10 0 0 0 60 0 9000000 3
+
+Documentation on Raspberry Pi DPI video: https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003471-WP/Using-a-DPI-display.pdf
 
 ## Other Vehicles
 I only tested this setup on the DVD800 Navi display of an Opel Insignia. Other Opel/Vauxhall models with the same DVD800 Navi radio system should work the same (e.g. Astra/Zafira). This display uses RGB666 video input, so only 6 bits per color are used. 
