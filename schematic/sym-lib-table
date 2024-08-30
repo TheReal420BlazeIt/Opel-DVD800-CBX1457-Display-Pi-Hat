@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "cxb1457r")(type "Legacy")(uri "${KIPRJMOD}/libraries/RPI_GVIF/cxb1457r.lib")(options "")(descr ""))
+)
