@@ -38,6 +38,19 @@ The Raspberry Pi needs to be configured to output RGB video over GPIO. To enable
 
 Documentation on Raspberry Pi DPI video: https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-003471-WP/Using-a-DPI-display.pdf
 
+### Update:
+The config.txt above doesn't work with newer versions of Raspberry Pi OS. If the above config doesn't work for you, try this one:
+
+    gpio=0-9=a2
+    gpio=12-17=a2
+    gpio=20-25=a2
+
+    dtoverlay=vc4-kms-v3d
+    dtoverlay=vc4-kms-dpi-generic,hactive=480,hfp=50,hsync=12,hbp=50
+    dtparam=vactive=240,vfp=6,vsync=3,vbp=10
+    dtparam=clock-frequency=9000000,rgb666-padhi
+    dpi_output_format=286742
+
 ## Other Vehicles
 I only tested this setup on the DVD800 Navi display of an Opel Insignia. Other Opel/Vauxhall models with the same DVD800 Navi radio system should work the same (e.g. Astra/Zafira). This display uses RGB666 video input, so only 6 bits per color are used. 
 
@@ -47,4 +60,24 @@ The CBX1457 chip is capable of using RGB888 video, so for some vehicles this set
 
 This hat may work on other car displays that use the CBX1457 transmitter in the head unit, however, the hardware/software setup may be different. The best option is to check your car's display datasheet & inspect the display driver PCB.
 
+### Update on other displays
+I successfully tested a similar display (GM part number: 23354890). Connectors and dimentions are the same, but this type has a display resolution of 800x480, so much better than the old display. Only config.txt changes are needed. Everything else works out of the box:
 
+    gpio=0-9=a2
+    gpio=12-17=a2
+    gpio=20-25=a2
+
+    dtoverlay=vc4-kms-v3d
+    dtoverlay=vc4-kms-dpi-generic,hactive=800,hfp=210,hsync=1,hbp=182
+    dtparam=vactive=480,vfp=62,vsync=5,vbp=6
+    dtparam=clock-frequency=33300000,rgb666-padhi
+    dpi_output_format=286742
+
+## Note
+Later I noticed some minor errors in the schematic:
+
+    R7  330R needs to be 4.7K
+    C9  640p needs to be 680p (Although 640p works fine. Just based on reference design)
+    C10 640p needs to be 10nF
+
+This project is tested on Raspberry Pi 4, Compute Module 4, and Compute Module 5
